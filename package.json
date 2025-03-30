@@ -1,0 +1,54 @@
+{
+  "name": "electron-vue-template",
+  "version": "0.0.0",
+  "author": "Jimmy-sheep",
+  "description": "This is a template to developing an electron application with Vue 3 and TypeScript in Vite.",
+  "type": "module",
+  "private": true,
+  "main": "dist-electron/main/index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build && electron-builder",
+    "preview": "vite preview",
+    "lint": "eslint . --fix",
+    "visualizer": "npx vite-bundle-visualizer"
+  },
+  "debug": {
+    "env": {
+      "VITE_DEV_SERVER_URL": "http://127.0.0.1:3344/"
+    }
+  },
+  "dependencies": {
+    "@primeuix/themes": "^1.0.0",
+    "pinia": "^3.0.1",
+    "primeicons": "^7.0.0",
+    "primevue": "^4.3.3",
+    "tailwindcss": "^4.0.17",
+    "tailwindcss-primeui": "^0.6.1",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@primevue/auto-import-resolver": "^4.3.3",
+    "@stylistic/eslint-plugin": "^4.2.0",
+    "@tailwindcss/vite": "^4.0.17",
+    "@tsconfig/node22": "^22.0.0",
+    "@types/node": "^22.13.9",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/eslint-config-typescript": "^14.5.0",
+    "@vue/tsconfig": "^0.7.0",
+    "electron": "^35.1.2",
+    "electron-builder": "^26.0.12",
+    "eslint": "^9.21.0",
+    "eslint-plugin-vue": "~10.0.0",
+    "sass-embedded": "^1.86.0",
+    "typescript": "~5.8.2",
+    "unplugin-vue-components": "^28.4.1",
+    "vite": "^6.0.5",
+    "vite-bundle-visualizer": "^1.2.1",
+    "vite-plugin-electron": "^0.29.0",
+    "vite-plugin-electron-renderer": "^0.14.5",
+    "vite-plugin-vue-devtools": "^7.6.8",
+    "vue-tsc": "^2.1.10"
+  }
+}
