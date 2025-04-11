@@ -1,0 +1,47 @@
+# Compiled output
+dist
+dist-ssr
+dist-electron
+release
+coverage
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node
+node_modules
+*.local
+
+# Playwright
+playwright-report
+blob-report
+playwright/.cache
+test-results
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Visual Studio Code
+.vscode/*
+!.vscode/.debug.script.mjs
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# System files
+.DS_Store
+Thumbs.db
+
+*.tsbuildinfo

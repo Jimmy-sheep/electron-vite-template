@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build and Package Electron Application
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: npm install -g pnpm && pnpm install
+
+      - name: Build and Package
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: pnpm run build
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Release ${{ runner.os }} ${{ github.ref_name }}
+          path: |
+            release/${{ github.ref_name }}/*.exe
+            release/${{ github.ref_name }}/*.dmg
+            release/${{ github.ref_name }}/*.AppImage
+
+  release:
+    name: Create Github Release
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release/${{ github.ref_name }}
+          merge-multiple: true
+
+      - name: Create Release and Upload Assets
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release v${{ github.ref_name }}
+          files: |
+            release/${{ github.ref_name }}/*.exe
+            release/${{ github.ref_name }}/*.dmg
+            release/${{ github.ref_name }}/*.AppImage
